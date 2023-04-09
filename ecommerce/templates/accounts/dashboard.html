@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-conten padding-y bg section-top">
+    <div class="container">
+        {% include "includes/alerts.html" %}
+        <div class="row">
+            <aside class="col-md-3">
+                <!--   SIDEBAR   -->
+                <ul class="list-group">
+                    <a class="list-group-item active" href="#">Cài đặt </a>
+                    <a class="list-group-item" href="#"> Lịch sử đặt hàng của bạn </a>
+                    <a class="list-group-item" href="#">Giao dịch</a>
+                    <a class="list-group-item" href="#">Trả lại và hoàn tiền</a>
+                    <a class="list-group-item" href="#">Mặt hàng bán chạy</a>
+                    <a class="list-group-item" href="#">Nhận đơn đặt hàng</a>
+                </ul>
+                <br>
+                <a class="btn btn-light btn-block" href="{% url 'logout' %}"> <i class="fa fa-power-off"></i> <span class="text">Thoát</span> </a>
+                <!--   SIDEBAR .//END   -->
+            </aside>
+            <main class="col-md-9">
+                <article class="card">
+                    <!--<header class="card-header">
+                        <strong class="d-inline-block mr-3">Order ID: 6123456789</strong>
+                        <span>Order Date: 16 December 2018</span>
+                    </header>-->
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h6 class="text-muted">Thông tin</h6>
+                                <p><b>Tên:</b> {{fistname}}<br></p>
+                                <p><b>Số điện thoại:</b> {{phone}}</p>
+                                <p><b>Email:</b> {{email}}</p>
+                            </div>
+                            <div class="col-md-4">
+                                <h6 class="text-muted">Thông báo</h6>
+                                <p>Hiện một số tính năng trên website đang được cập nhật:</p>
+                                <ul>
+                                    <li>Lịch sử đặt hàng của bạn</li>
+                                    <li>Giao dịch</li>
+                                    <li>Trả lại và hoàn tiền</li>
+                                    <li>Mặt hàng bán chạy</li>
+                                    <li>Nhận đơn hàng</li>
+                                </ul>
+                                <p>Mong quý khách hàng có thể liên hệ trực tiếp đến đơn vị thông qua số điện thoại +84 397952588. Pando chân thành cảm ơn quý khách</p>
+                            </div>
+                            <!--<div class="col-md-4">
+                                <h6 class="text-muted">Payment</h6>
+                                <span class="text-success">
+                                    <i class="fab fa-lg fa-cc-visa"></i>
+                                    Visa **** 4216
+                                </span>
+                                <p>Subtotal: $356 <br>
+                                    Shipping fee: $56 <br>
+                                    <span class="b">Total: $456 </span>
+                                </p>
+                            </div>-->
+                        </div> <!-- row.// -->
+                    </div> <!-- card-body .// -->
+                   <!-- <div class="table-responsive">
+                        <table class="table table-hover">
+                            <tr>
+                                <td width="65">
+                                    <img src="../images/items/1.jpg" class="img-xs border">
+                                </td>
+                                <td>
+                                    <p class="title mb-0">Product name goes here </p>
+                                    <var class="price text-muted">USD 145</var>
+                                </td>
+                                <td> Seller <br> Nike clothing </td>
+                                <td width="250"> <a href="#" class="btn btn-outline-primary">Track order</a> <a href="#"
+                                        class="btn btn-light"> Details </a> </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <img src="../images/items/2.jpg" class="img-xs border">
+                                </td>
+                                <td>
+                                    <p class="title mb-0">Another name goes here </p>
+                                    <var class="price text-muted">USD 15</var>
+                                </td>
+                                <td> Seller <br> ABC shop </td>
+                                <td> <a href="#" class="btn btn-outline-primary">Track order</a> <a href="#"
+                                        class="btn btn-light"> Details </a> </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <img src="../images/items/3.jpg" class="img-xs border">
+                                </td>
+                                <td>
+                                    <p class="title mb-0">The name of the product goes here </p>
+                                    <var class="price text-muted">USD 145</var>
+                                </td>
+                                <td> Seller <br> Wallmart </td>
+                                <td> <a href="#" class="btn btn-outline-primary">Track order</a> <a href="#"
+                                        class="btn btn-light"> Details </a> </td>
+                            </tr>
+                        </table>
+                    </div>--> <!-- table-responsive .end// -->
+                </article> <!-- order-group.// -->
+            </main>
+        </div> <!-- row.// -->
+    </div>
+
+
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+{% endblock %}

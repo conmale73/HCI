@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanizelib %}
+
+{% block content %}
+<!-- ========================= SECTION MAIN ========================= -->
+<section class="section-intro padding-y-sm section-top">
+    <div class="container">
+        {% include "includes/alerts.html" %}
+        <div id="demo" class="carousel slide" data-ride="carousel">
+
+            <!-- Indicators -->
+            <ul class="carousel-indicators">
+              <li data-target="#demo" data-slide-to="0" class="active"></li>
+              <li data-target="#demo" data-slide-to="1"></li>
+              <li data-target="#demo" data-slide-to="2"></li>
+            </ul>
+            
+            <!-- The slideshow -->
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="{% static 'images/banners/banner.png' %}" class="img-fluid rounded" alt="Công Ty TNHH Thai Boat" width="100%" height="400">
+              </div>
+              <div class="carousel-item">
+                <img src="{% static 'images/banners/vietnam.png' %}" class="img-fluid rounded" alt="Hoàng xa và Trường xa là của Việt Nam" width="100%" height="400">
+              </div>
+              <div class="carousel-item">
+                <img src="{% static 'images/banners/banner3.png' %}" class="img-fluid rounded" alt="Tàu Như Ý" width="100%" height="400">
+              </div>
+            </div>
+            
+            <!-- Left and right controls -->
+            <a class="carousel-control-prev" href="#demo" data-slide="prev">
+              <span class="carousel-control-prev-icon"></span>
+            </a>
+            <a class="carousel-control-next" href="#demo" data-slide="next">
+              <span class="carousel-control-next-icon"></span>
+            </a>
+          </div>
+    </div>
+</section>
+<!-- ========================= SECTION MAIN END// ========================= -->
+
+<!-- ========================= SECTION  ========================= -->
+<section class="section-name padding-y-sm">
+    <div class="container">
+        <header class="section-heading">
+            <a href="{% url 'store' %}" class="btn btn-outline-secondary float-right">Xem thêm</a>
+            <h3 class="section-title">Sản phẩm phổ biến</h3>
+        </header><!-- sect-heading -->
+        <div class="row">
+            {% for product in products %}
+            <div class="col-md-3">
+                <div class="card card-product-grid">
+                    <a href="{{ product.get_url }}" class="img-wrap"> <img src="{{ product.images.url }}"> </a>
+                    <figcaption class="info-wrap">
+                        <a href="{{ product.get_url }}" class="title">{{ product.product_name }}</a>                    
+                        <div class="price mt-1">{{ product.price|intcomma }} VNĐ</div> <!-- price-wrap.// -->
+                    </figcaption>
+                </div>
+            </div> <!-- col.// -->
+            {% endfor %}
+        </div> <!-- row.// -->
+    </div><!-- container // -->
+    <div class="container">
+        <header class="section-heading">
+            <a href="{% url 'postnew' %}" class="btn btn-outline-secondary float-right">Xem thêm</a>
+            <h3 class="section-title">Thông tin doanh nghiệp</h3>
+        </header><!-- sect-heading -->
+        <div class="row">
+            {% for post in postnew %}
+            <div class="col-md-3">
+                <div class="card card-product-grid">
+                    <a href="{{ post.get_url }}" class="img-wrap"> <img src="{{ post.images.url }}"> </a>
+                    <figcaption class="info-wrap">
+                        <a href="{{ post.get_url }}" class="title">{{ post.postname }}</a>
+                    </figcaption>
+                </div>
+            </div> <!-- col.// -->
+            {% endfor %}
+        </div> <!-- row.// -->
+    </div><!-- container // -->
+</section>
+<!-- ========================= SECTION  END// ========================= -->
+{% endblock %}

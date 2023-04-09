@@ -1,0 +1,168 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanizelib %}
+{% block content %}
+<main class="mt-5 pt-4">
+    <div class="container mt-5">
+        <!--Grid row-->
+        <div class="row">
+            <!--Grid column-->
+            <div class="col-md-6 mb-4 text-center">
+                <img src="{{ single_product.images.url }}" class="img-fluid" alt="" style="width:60%; height: auto;" />
+            </div>
+            <!--Grid column-->
+
+            <!--Grid column-->
+            <div class="col-md-6 mb-4">
+                <!--Content-->
+                <div class="p-4">
+                    <div class="mb-3">
+                        <h3 class="title">{{ single_product.product_name }}</h3>
+                    </div>
+
+                    <p class="lead">
+                        <div class="price mt-1 text-danger h5">{{ single_product.price|intcomma }} VNĐ</div>  
+                    </p>
+
+                    <p>Xuất xứ: Việt Nam</p>
+                    <p>Trọng lượng: 0,2 Kg</p>
+                    <p>Chi phí vận chuyển: 56.000 VND</p>
+                    <p>Bảo hành: 1 năm</p>
+                    <form class="d-flex justify-content-left" action="{% url 'add_cart' single_product.id %}" method="POST">
+                        <!-- Default input -->
+                        <div class="form-outline me-1" style="width: 100px;">
+                            <input type="number" value="1" class="form-control" />
+                        </div>
+                        {% csrf_token %}
+                        {% if single_product.stock > 0 %}
+                        <button class="btn btn-warning ml-lg-3" type="submit">
+                            Thêm vào giỏ hàng
+                            <i class="fas fa-shopping-cart ms-1"></i>
+                        </button>
+                        {% else %}
+                            <h5 class="text-danger">Hết hàng</h5>
+                        {% endif %}
+                    </form>
+                </div>
+                <!--Content-->
+            </div>
+            <!--Grid column-->
+        </div>
+        <!--Grid row-->
+
+        <hr />
+
+        <!--Grid row-->
+        <div class="row d-flex justify-content-center">
+            <!--Grid column-->
+            <div class="col-md-8">
+                <h4 class="my-4 h4">Chi tiết sản phẩm</h4>
+                <div class="ck ck-content">
+                    <p>{{ single_product.description|safe }}</p>
+                </div>
+            </div>
+            <!--Grid column-->
+        </div>
+    </div>
+    <div class="container">
+        <header class="section-heading">
+            <h4 class="my-4 h4">Sản phẩm bạn có thể quan tâm</h4>
+        </header>
+        <div class="row">
+            {% for product in products %}
+            <div class="col-md-3">
+                <div class="card card-product-grid">
+                    <a href="{{ product.get_url }}" class="img-wrap"> <img src="{{ product.images.url }}"> </a>
+                    <figcaption class="info-wrap">
+                        <a href="{{ product.get_url }}" class="title">{{ product.product_name }}</a>                    
+                        <div class="price mt-1">{{ product.price|intcomma }} VNĐ</div> <!-- price-wrap.// -->
+                    </figcaption>
+                </div>
+            </div> <!-- col.// -->
+            {% endfor %}
+        </div>
+    </div>
+</main>
+<section class="section-content padding-y bg section-top">
+    
+    <div class="container">
+        <!-- ============================ COMPONENT 1 ================================= -->
+        <!-- card.// -->
+        <!-- ============================ COMPONENT 1 END .// ================================= -->
+        <br />
+        <div class="row">
+            <div class="col-md-9">
+                <form action="{% url 'submit_review' single_product.id %}" method="POST">
+                    {% csrf_token %}
+                    <h5>Viết đánh giá của bạn</h5>
+                    <div>
+                        {% include "includes/alerts.html" %}
+                        <label>Bạn đánh giá sản phẩm này như thế nào?</label>
+                        <br>
+                        <div class="rate">
+							<input type="radio" name="rating" id="rating10" value="5" required /><label for="rating10" title="5"></label>
+							<input type="radio" name="rating" id="rating9" value="4.5" required /><label for="rating9" title="4.5" class="half"></label>
+							<input type="radio" name="rating" id="rating8" value="4" required /><label for="rating8" title="4"></label>
+							<input type="radio" name="rating" id="rating7" value="3.5" required /><label for="rating7" title="3.5" class="half"></label>
+							<input type="radio" name="rating" id="rating6" value="3" required /><label for="rating6" title="3"></label>
+							<input type="radio" name="rating" id="rating5" value="2.5" required /><label for="rating5" title="2.5" class="half"></label>
+							<input type="radio" name="rating" id="rating4" value="2" required /><label for="rating4" title="2"></label>
+							<input type="radio" name="rating" id="rating3" value="1.5" required /><label for="rating3" title="1.5" class="half"></label>
+							<input type="radio" name="rating" id="rating2" value="1" required /><label for="rating2" title="1"></label>
+							<input type="radio" name="rating" id="rating1" value="0.5" required /><label for="rating1" title="0.5" class="half"></label>
+						</div>
+                        <br>
+                        Tiêu đề bài đánh giá:
+                        <input type="text" class="form-control" name="subject">
+                        <br>
+                        Đánh giá
+                        <textarea name="review" rows="4" class="form-control"></textarea>
+                        <br>
+                        {% if user.is_authenticated %}
+                            {% if orderproduct %}
+                            <input type="submit" value="Submit Review" class="btn btn-primary">
+                            {% else %}
+                            <p>Bạn phải mua sản phẩm này để gửi bình luận.</p>
+                            {% endif %}
+                        {% else %}
+                        <p>Bạn phải đăng nhập để gửi bình luận <span><a href="{% url 'login' %}">Đăng nhập ngay bây giờ</a></span></p>
+                        {% endif %}
+                    </div>
+                </form>
+                <br>
+                <header class="section-heading">
+                    <h3>Phản hồi khách hàng</h3>
+                </header>
+                {% for review in reviews %}
+                <article class="box mb-3">
+                    <div class="icontext w-100">
+                        <div class="text">
+                            <span class="date text-muted float-md-right">{{ review.updated_at }}</span>
+                            <h6 class="mb-1">{{ review.user.full_name }}</h6>
+                            <div class="rating-star">
+                                <span>
+                                    <i class="fa fa-star{% if review.rating == 0.5 %}-half-o{% elif review.rating < 1 %}-o {% endif %}" aria-hidden="true"></i>
+                                    <i class="fa fa-star{% if review.rating == 1.5 %}-half-o{% elif review.rating < 2 %}-o {% endif %}" aria-hidden="true"></i>
+                                    <i class="fa fa-star{% if review.rating == 2.5 %}-half-o{% elif review.rating < 3 %}-o {% endif %}" aria-hidden="true"></i>
+                                    <i class="fa fa-star{% if review.rating == 3.5 %}-half-o{% elif review.rating < 4 %}-o {% endif %}" aria-hidden="true"></i>
+                                    <i class="fa fa-star{% if review.rating == 4.5 %}-half-o{% elif review.rating < 5 %}-o {% endif %}" aria-hidden="true"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- icontext.// -->
+                    <div class="mt-3">
+                        <h6>{{ review.subject }}</h6>
+                        <p>{{ review.review }}</p>
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+            <!-- col.// -->
+        </div>
+        <!-- row.// -->
+    </div>
+    <!-- container .//  -->
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+{% endblock %}

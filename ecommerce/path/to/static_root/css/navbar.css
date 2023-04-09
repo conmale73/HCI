@@ -1,0 +1,58 @@
+.disk-none{
+    display: none;
+}
+.btn-border{
+    border: 1px solid #cccc;
+}
+.section-top{
+    margin-top: 80px;
+}
+
+
+@media (max-width: 992px) {
+    .disk-block{
+        display: none;
+    }
+    .disk-none{
+        display: block;
+    }
+    .padding-top-bottom{
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    .dropdown-menu{
+        left: -50px;
+    }
+    .navbar-toggler{
+        right: 0px;
+        float: right;
+    }
+    .margi-left{
+        margin-left: 0%;
+    }
+    .navber-right{
+        margin-left: 35%;
+    }
+    .logo-top{
+        margin-top: 10px;
+    }
+    .section-top{
+        margin-top: 130px;
+    }
+    .padding-mobile{
+        padding-top: 0rem;
+        padding-bottom: 0rem;
+    }
+}
+
+@media all and (max-width: 768px) {
+    .disk-none{
+        display: block;
+    }
+    .disk-block{
+        display: none;
+    }
+    .margi-left{
+        margin-left: 30%;
+    }
+}

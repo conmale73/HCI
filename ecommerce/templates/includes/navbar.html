@@ -1,0 +1,119 @@
+{% load static %}
+
+<header class="section-header bg fixed-top">
+    <section class="header-main border-bottom padding-mobile">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-2 col-md-3 col-6">
+                    <a href="{% url 'home' %}" class="brand-wrap logo-top">
+                        <img class="logo" src="{% static './images/logo.png' %}">
+                    </a> <!-- brand-wrap.// -->
+                </div>
+                <div class="col-lg-2 col-md-3 col-6">
+                    <button class="navbar-toggler navber-right" type="button" data-toggle="collapse" data-target="#navbarTop5"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>  
+                </div>
+                <div class="col-lg  col-md-6 col-sm-12 col">
+                    <form action="{% url 'search' %}" class="search" method="GET">
+                        <div class="input-group w-100">
+                            <input type="text" class="form-control" style="width:50%;" placeholder="Tìm kiếm..." name="q" value="{{ q }}">
+                            <div class="input-group-append">
+                                <button class="btn" type="submit" style="border:1px solid rgba(181, 181, 181, 0.8);">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form> <!-- search-wrap .end// -->
+                </div> <!-- col.// -->
+                <div class="disk-block col-lg-3 col-sm-6 col-8 order-2 order-lg-3">
+                    <div class="d-flex justify-content-end mb-3 mb-lg-0">
+                        {% if user.id is None %}
+                        <div class="widget-header">
+                            <small class="title text-muted">Thai Boat chào mừng bạn</small>
+                            <div>
+                                <a href="{% url 'login' %}">Đăng nhập</a> <span class="dark-transp"> | </span>
+                                <a href="{% url 'register' %}"> Đăng ký</a>
+                            </div>
+                        </div>
+                        {% else %}
+                        <div class="widget-header">
+                            <small class="title text-muted">Xin chào {{ user.first_name }}!</small>
+                            <div>
+                                <a href="{% url 'dashboard' %}">Tài khoản</a> <span class="dark-transp"> | </span>
+                                <a href="{% url 'logout' %}"> Đăng xuất</a>
+                            </div>
+                        </div>
+                        {% endif %}
+                        <a href="{% url 'cart' %}" class="widget-header pl-3 ml-3">
+                            <div class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i>
+                            </div>
+                            <span class="badge badge-pill badge-danger notify">{{ cart_count }}</span>
+                        </a>
+                    </div> <!-- widgets-wrap.// -->
+                </div> <!-- col.// -->
+
+                
+            </div> <!-- row.// -->
+        </div> <!-- container.// -->
+        <nav class="p-md-0 navbar-light col-lg">
+            <div class="container">
+                <div class="collapse navbar-collapse" id="navbarTop5">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item dropdown">
+                            <div class="container">
+                                <div class="row">
+                                    {% for category in links %}
+                                    <div class="col-md-3">
+                                        <a class="nav-link" href="{{ category.get_url }}"> <img src="{{ category.images.url }}" style="width: 20px;"> {{ category.category_name }}</a>
+                                    </div>
+                                    {% endfor %}
+                                    <div class="col-md-3">
+                                        <a class="nav-link" href="{% url 'store' %}"><i class="fas fa-archive"></i> Tất cả sản phẩm</a>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <a class="nav-link" href="{% url 'postnew' %}"><i class="fa fa-newspaper-o"></i> Thông tin doanh nghiệp</a>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <a href="#Email" class="nav-link"> <i class="fa fa-envelope"></i> Email </a>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <a href="#Phone" class="nav-link"> <i class="fa fa-phone"></i> Liên hệ </a>
+                                    </div>
+                                    <div class="col-md-3 disk-none">
+                                        <a href="{% url 'cart' %}" class="nav-link"><i class="fa fa-shopping-cart"></i> Giỏ hàng </a>
+                                    </div>
+                                    <div class="col-md-3 disk-none">                            <div class="nav-link">
+                                        <i class="fa fa-user"></i>
+                                        {% if user.id is None %}
+                                        <div class="widget-header">
+                                            <small class="title text-muted">Thaibost chào mừng bạn</small>
+                                            <div>
+                                                <a href="{% url 'login' %}">Đăng nhập</a> <span class="dark-transp"> | </span>
+                                                <a href="{% url 'register' %}"> Đăng ký</a>
+                                            </div>
+                                        </div>
+                                        {% else %}
+                                        <div class="widget-header">
+                                            <small class="title text-muted">Xin chào {{ user.first_name }}!</small>
+                                            <div>
+                                                <a href="{% url 'dashboard' %}"> Tài khoản </a> <span class="dark-transp"> | </span>
+                                                <a href="{% url 'logout' %}"> Đăng xuất</a>
+                                            </div>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                                </div>
+                            </div>
+                            
+                        </li>
+                    </ul>
+                     <!-- col.// -->
+                </div> <!-- navbar-collapse .// -->
+            </div>
+        </nav>
+    </section> <!-- header-main .// -->
+</header> <!-- section-header.// -->

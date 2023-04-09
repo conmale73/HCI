@@ -1,0 +1,5 @@
+{% autoescape off %}
+Xin chào {{ user.username }},
+Vui lòng nhấp vào liên kết để xác nhận đăng ký của bạn,
+http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+{% endautoescape %}
